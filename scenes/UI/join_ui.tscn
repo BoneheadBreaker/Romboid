@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://dp4sf5iw2y2uv"]
+
+[ext_resource type="Script" uid="uid://bkakndh0sauk2" path="res://scenes/UI/join_ui.gd" id="1_5p7na"]
+
+[node name="join_ui" type="Control" unique_id=1875535670]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5p7na")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=865178559]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1105994839]
+layout_mode = 2
+
+[node name="HowToUseIP" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1336832027]
+layout_mode = 2
+text = "ipv4 address to connect to
+
+If one is not provided it will default to localhost  (any games ran on your current machine in for example another window)"
+
+[node name="IPInput" type="LineEdit" parent="CenterContainer/VBoxContainer" unique_id=165854127]
+layout_mode = 2
+placeholder_text = "Enter IP here"
+
+[node name="HowToUsePort" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1933509291]
+layout_mode = 2
+text = "Port to connect to
+
+If one is not provided it will default to 36666 
+(anything running on the machine with the ip you provided above (or the default one)  running on port  36666"
+
+[node name="PortInput" type="LineEdit" parent="CenterContainer/VBoxContainer" unique_id=937917925]
+layout_mode = 2
+placeholder_text = "Enter port here"
+
+[node name="JoinGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=1887487988]
+layout_mode = 2
+text = "Connect"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/JoinGameButton" to="." method="_on_join_game_button_pressed"]

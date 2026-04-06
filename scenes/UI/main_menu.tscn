@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://wp1k4xf2xl4k"]
+
+[ext_resource type="Script" uid="uid://dluufvcyq0we4" path="res://scripts/main_menu.gd" id="1_qwnig"]
+
+[node name="MainMenu" type="Control" unique_id=481830906]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qwnig")
+
+[node name="Control" type="Control" parent="." unique_id=110618965]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=1005811272]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -10.0
+offset_right = 4.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Host" type="Button" parent="Control/VBoxContainer" unique_id=525695709]
+layout_mode = 2
+text = "Host"
+
+[node name="Join" type="Button" parent="Control/VBoxContainer" unique_id=328183681]
+layout_mode = 2
+text = "Join"
+
+[connection signal="pressed" from="Control/VBoxContainer/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Control/VBoxContainer/Join" to="." method="_on_join_pressed"]

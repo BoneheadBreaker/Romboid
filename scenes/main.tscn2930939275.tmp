@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://d1ycb16aghcu0"]
+
+[ext_resource type="Script" uid="uid://dmcha36cafddc" path="res://scripts/main.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://ck2jcd10huikr" path="res://scripts/player.gd" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://wp1k4xf2xl4k" path="res://scenes/UI/main_menu.tscn" id="3_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bl537f7pa0y8m" path="res://icon.svg" id="3_sugp2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(114, 112.5)
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_qhqgy"]
+properties/0/path = NodePath(".:position")
+properties/0/spawn = true
+properties/0/replication_mode = 1
+
+[sub_resource type="PackedScene" id="PackedScene_tbgi4"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
+"names": PackedStringArray("Player", "CharacterBody2D", "script", "Sprite2D", "Sprite2D", "texture", "CollisionShape2D", "CollisionShape2D", "shape", "Camera2D", "Camera2D", "MultiplayerSynchronizer", "MultiplayerSynchronizer", "replication_config"),
+"node_count": 5,
+"node_ids": PackedInt32Array(1048452225, 445906121, 1475926339, 577438255, 1899539562),
+"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 1, 8, 2, 0, 1073741826, 0, 10, 9, -1, 0, 0, 1073741827, 0, 12, 11, -1, 1, 13, 3, 0),
+"variants": [ExtResource("2_jyhfs"), ExtResource("3_sugp2"), SubResource("RectangleShape2D_g2els"), SubResource("SceneReplicationConfig_qhqgy")],
+"version": 3
+}
+
+[node name="Main" type="Node2D" unique_id=2063003548]
+script = ExtResource("1_o5qli")
+player_scene = SubResource("PackedScene_tbgi4")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2005403482]
+
+[node name="MainMenu" parent="CanvasLayer" unique_id=481830906 instance=ExtResource("3_jyhfs")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=454992532]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1159438942]
+position = Vector2(202.5, 188)
+scale = Vector2(4.1640625, 3.9375)
+texture = ExtResource("3_sugp2")
+
+[node name="Players" type="Node2D" parent="." unique_id=1809449623]
+
+[node name="BulletMultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1813908992]
+_spawnable_scenes = PackedStringArray("uid://bhbahipbysjg0")
+spawn_path = NodePath("../Bullets")
+
+[node name="Bullets" type="Node2D" parent="." unique_id=2115964766]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=587826005]
+_spawnable_scenes = PackedStringArray("uid://do284ymvr7q0u")
+spawn_path = NodePath("..")

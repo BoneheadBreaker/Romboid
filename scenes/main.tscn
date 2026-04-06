@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d1ycb16aghcu0"]
+
+[ext_resource type="Script" uid="uid://dmcha36cafddc" path="res://scripts/main.gd" id="1_o5qli"]
+[ext_resource type="PackedScene" uid="uid://dsdn7826h6wwo" path="res://scenes/Maps/testing_map.tscn" id="2_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://wp1k4xf2xl4k" path="res://scenes/UI/main_menu.tscn" id="3_jyhfs"]
+[ext_resource type="Texture2D" uid="uid://bl537f7pa0y8m" path="res://icon.svg" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://cjvym3hvelbnx" path="res://scenes/UI/host_ui.tscn" id="3_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://dp4sf5iw2y2uv" path="res://scenes/UI/join_ui.tscn" id="4_tefeu"]
+
+[node name="Main" type="Node2D" unique_id=2063003548]
+script = ExtResource("1_o5qli")
+level_scene = ExtResource("2_jyhfs")
+host_UI_scene = ExtResource("3_tbgi4")
+join_UI_scene = ExtResource("4_tefeu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2005403482]
+
+[node name="MainMenu" parent="CanvasLayer" unique_id=481830906 instance=ExtResource("3_jyhfs")]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=454992532]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1159438942]
+position = Vector2(202.5, 188)
+scale = Vector2(4.1640625, 3.9375)
+texture = ExtResource("3_sugp2")
+
+[node name="LoadedLevels" type="Node2D" parent="." unique_id=1169561316]
+
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="LoadedLevels" unique_id=836145481]
+_spawnable_scenes = PackedStringArray("uid://dsdn7826h6wwo")
+spawn_path = NodePath("..")
