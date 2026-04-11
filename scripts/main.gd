@@ -33,6 +33,7 @@ func start_game():
 	load_game.rpc()
 	
 	UI_holder.get_node("HostUi").queue_free()
+	NetworkManager.game_started = true
 
 func join_game():
 	NetworkManager.join_game()

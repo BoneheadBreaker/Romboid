@@ -13,12 +13,13 @@ var connection_type := "player"
 
 # Scenes
 var player_scene = preload("res://scenes/player.tscn")
+var game_started = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
-	multiplayer.connected_to_server.connect(_on_connected_ok)
+	multiplayer.connected_to_server.connect(_on_connected_ok) # only runs on client once its connected
 	multiplayer.connection_failed.connect(_on_connected_fail)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
@@ -61,6 +62,10 @@ func _register_player(new_player_info):
 # This allows transfer of all desired data for each player, not only the unique ID.
 func _on_player_connected(id):
 	_register_player.rpc_id(id, connection_type)
+	
+	if multiplayer.is_server():
+		if NetworkManager.game_started == true:
+			multiplayer.multiplayer_peer.disconnect_peer(id)
 
 func _on_player_disconnected(id):
 	print("Player ", id, " Left")

@@ -10,8 +10,6 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	connected_players_label.text = str(NetworkManager.players.size())
-	print(str(NetworkManager.players.size()))
-
 
 func _on_start_game_button_pressed() -> void:
 	Signals.start_game.emit()
