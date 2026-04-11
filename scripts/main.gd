@@ -51,9 +51,3 @@ func load_game():
 		await get_tree().process_frame
 		
 		print("DEBUG: SPAWNING LEVEL")
-
-#@rpc("authority", "call_local", "reliable")
-#func switch_to_game_camera():
-	#player.get_node("Camera2D").set_enabled(true)
-	#player.get_node("Camera2D").make_current()
-	#print(player.get_node("Camera2D").is_current())

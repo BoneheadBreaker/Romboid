@@ -7,6 +7,12 @@ func _ready() -> void:
 	
 	$PlayerID.text = name
 	NetworkManager.player_disconnected.connect(_on_player_disconnected)
+
+	if is_multiplayer_authority():
+		$Camera2D.enabled = true
+		$Camera2D.make_current()
+	else:
+		$Camera2D.enabled = false
 	
 func _physics_process(delta: float) -> void:
 		
