@@ -101,3 +101,9 @@ position = Vector2(498, 64)
 
 [node name="Node2D4" type="Node2D" parent="SpawnPoints" unique_id=1073349672]
 position = Vector2(88, 298)
+
+[node name="Bullets" type="Node2D" parent="." unique_id=1701350804]
+
+[node name="BulletSpawner" type="MultiplayerSpawner" parent="Bullets" unique_id=140456060]
+_spawnable_scenes = PackedStringArray("uid://bhbahipbysjg0")
+spawn_path = NodePath("..")

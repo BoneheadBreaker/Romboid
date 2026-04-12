@@ -1,6 +1,6 @@
 extends Node
 
-@onready var scene_root = get_tree().get_root()
+@onready var scene_root = get_tree().get_root() 
 
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
@@ -17,6 +17,9 @@ var game_started = false
 # Scenes
 var player_scene = preload("res://scenes/player.tscn")
 var level_scene = preload("res://scenes/Maps/testing_map.tscn")
+var bullet_scene = preload("res://scenes/bullet.tscn")
+
+var players_container
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -79,6 +82,44 @@ func load_game():
 		await get_tree().process_frame
 		
 		print("DEBUG: SPAWNING LEVEL")
+
+@rpc("any_peer", "call_local", "reliable")
+func request_bullet(rot):
+	if multiplayer.is_server():
+		players_container = scene_root.get_node("Main/LoadedLevels/TestingMap/Players/")
+		
+		var sender_id = multiplayer.get_remote_sender_id()
+		var player = players_container.get_node_or_null(str(sender_id))
+		if not player:
+			print("Server: Player not found:", sender_id)
+			return
+			
+		# Instantiate bullet
+		var bullet = bullet_scene.instantiate()
+		bullet.global_position = player.global_position
+		bullet.rotation = rot
+		bullet.shooter_id = sender_id
+		#bullet.set_multiplayer_authority(sender_id) # optional, server can keep authority
+
+		# Add to server-side bullets container (normal add_child)
+		var bullets_node = scene_root.get_node("Main/LoadedLevels/TestingMap/Bullets")
+		bullets_node.add_child(bullet, true)
+
+		# Optional: add to group for server-side collision
+		bullet.add_to_group("Bullets")
+
+		# Notify clients to show the bullet via RPC
+		#rpc("spawn_bullet_on_client", sender_id, bullet.global_position, bullet.rotation)
+
+@rpc("any_peer", "call_local")
+func spawn_bullet_on_client(shooter_id: int, pos: Vector2, rot: float) -> void:
+	# Clients spawn a **local copy** for visuals only
+	var bullet = bullet_scene.instantiate()
+	bullet.global_position = pos
+	bullet.rotation = rot
+	bullet.shooter_id = shooter_id
+	scene_root.get_node("Main/LoadedLevels/TestingMap/Bullets").add_child(bullet)
+
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.

@@ -32,6 +32,10 @@ func _physics_process(delta: float) -> void:
 		velocity.x -= 1
 	if Input.is_action_pressed("D"):
 		velocity.x += 1
+	
+	if Input.is_action_just_pressed("shoot"):
+		var rot = (get_global_mouse_position() - global_position).angle()
+		NetworkManager.request_bullet.rpc_id(1, rot)
 
 	velocity = velocity.normalized() * speed
 	
