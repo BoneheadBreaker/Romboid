@@ -3,6 +3,8 @@ extends Node2D
 @export var level_scene : PackedScene
 @export var host_UI_scene : PackedScene
 @export var join_UI_scene : PackedScene
+var game_already_started_ui_scene = preload("res://scenes/UI/game_already_started_ui.tscn")
+var main_menu = preload("res://scenes/UI/main_menu.tscn")
 
 @onready var UI_holder = $CanvasLayer
 
@@ -12,6 +14,9 @@ func _ready() -> void:
 	
 	Signals.connect("start_game", start_game)
 	Signals.connect("join_game", join_game)
+	
+	Signals.connect("game_already_started", game_already_started)
+	Signals.connect("back_to_menu", go_back_to_menu)
 
 func host_game_UI():
 	NetworkManager.create_game()
@@ -29,8 +34,20 @@ func join_game_UI():
 	
 	UI_holder.get_node("MainMenu").queue_free()
 
+func game_already_started():
+	var GameAlreadyStartedUI = game_already_started_ui_scene.instantiate()
+	UI_holder.add_child(GameAlreadyStartedUI)
+
+func go_back_to_menu():
+	var all_uis = UI_holder.get_children()
+	for node in all_uis:
+		node.queue_free()
+	
+	var mainUI = main_menu.instantiate()
+	UI_holder.add_child(mainUI)
+
 func start_game():
-	load_game.rpc()
+	NetworkManager.load_game.rpc()
 	
 	UI_holder.get_node("HostUi").queue_free()
 	NetworkManager.game_started = true
@@ -39,16 +56,3 @@ func join_game():
 	NetworkManager.join_game()
 	
 	UI_holder.get_node("join_ui").queue_free()
-
-@rpc("any_peer", "call_local", "reliable")
-func load_game():
-	if multiplayer.is_server():
-		# only server loads scene. MultiplayerSpawner spawns it for everyone
-
-		var level = level_scene.instantiate()
-		$LoadedLevels.add_child(level)
-		
-		await get_tree().process_frame
-		await get_tree().process_frame
-		
-		print("DEBUG: SPAWNING LEVEL")

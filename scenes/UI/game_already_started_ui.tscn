@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://bib2tnbjt57li"]
+
+[ext_resource type="Script" uid="uid://v7x7gb2gt2j8" path="res://scenes/UI/game_already_started_ui.gd" id="1_2707l"]
+
+[node name="GameAlreadyStartedUI" type="Control" unique_id=1076017059]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2707l")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=84099011]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1010860961]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1999788378]
+layout_mode = 2
+text = "The game has already started
+
+Try again later or join a different lobby"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Button" type="Button" parent="CenterContainer/VBoxContainer" unique_id=323230814]
+layout_mode = 2
+text = "Back To Menu"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

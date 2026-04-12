@@ -1,5 +1,7 @@
 extends Node
 
+@onready var scene_root = get_tree().get_root()
+
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
 signal server_disconnected
@@ -10,10 +12,11 @@ const MAX_CONNECTIONS = 5
 
 var players = {}
 var connection_type := "player"
+var game_started = false
 
 # Scenes
 var player_scene = preload("res://scenes/player.tscn")
-var game_started = false
+var level_scene = preload("res://scenes/Maps/testing_map.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -58,6 +61,25 @@ func _register_player(new_player_info):
 	players[new_player_id] = new_player_info
 	player_connected.emit(new_player_id, new_player_info)
 
+@rpc("authority", "call_remote", "reliable")
+func game_already_started():
+	print("The server told me the game has already started!")
+	Signals.game_already_started.emit()
+	multiplayer.multiplayer_peer.close() 
+
+@rpc("any_peer", "call_local", "reliable")
+func load_game():
+	if multiplayer.is_server():
+		# only server loads scene. MultiplayerSpawner spawns it for everyone
+
+		var level = level_scene.instantiate()
+		scene_root.get_node("Main/LoadedLevels").add_child(level)
+		
+		await get_tree().process_frame
+		await get_tree().process_frame
+		
+		print("DEBUG: SPAWNING LEVEL")
+
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.
 func _on_player_connected(id):
@@ -65,7 +87,7 @@ func _on_player_connected(id):
 	
 	if multiplayer.is_server():
 		if NetworkManager.game_started == true:
-			multiplayer.multiplayer_peer.disconnect_peer(id)
+			game_already_started.rpc_id(id)
 
 func _on_player_disconnected(id):
 	print("Player ", id, " Left")
