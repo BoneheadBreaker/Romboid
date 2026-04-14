@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://jqrk5etlj685"]
+
+[ext_resource type="Script" uid="uid://cghc33di4eswx" path="res://scenes/UI/odd_players_ui.gd" id="1_o2dyc"]
+
+[node name="OddPlayersUI" type="Control" unique_id=2008917112]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_o2dyc")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2055994580]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1868689609]
+layout_mode = 2
+
+[node name="CantStartWithOddNumberLabel1" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1564914844]
+layout_mode = 2
+text = "You cant start the game with an odd number of players
+
+why?"
+horizontal_alignment = 1
+
+[node name="CantStartWithOddNumberLabel2" type="Label" parent="CenterContainer/VBoxContainer" unique_id=283744750]
+layout_mode = 2
+text = "1 it will be unfair
+2 its not supported, things may break, the game may crash and more!"
+
+[node name="ContinueAnyway" type="Button" parent="CenterContainer/VBoxContainer" unique_id=412306587]
+layout_mode = 2
+text = "Continue anyway - ALPHA"
+
+[node name="BackToLobby" type="Button" parent="CenterContainer/VBoxContainer" unique_id=661829608]
+layout_mode = 2
+text = "Back to lobby"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/ContinueAnyway" to="." method="_on_continue_anyway_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BackToLobby" to="." method="_on_back_to_lobby_pressed"]

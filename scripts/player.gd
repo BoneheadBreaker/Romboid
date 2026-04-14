@@ -1,6 +1,9 @@
 extends CharacterBody2D
 
 @export var syncPos := Vector2(0.0, 0.0)
+@export var health = 100
+
+const MAX_HEALTH = 100
 
 func _ready() -> void:
 	syncPos = global_position

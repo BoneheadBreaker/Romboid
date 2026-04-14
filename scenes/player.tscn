@@ -8,6 +8,9 @@ properties/0/path = NodePath(".:syncPos")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g2els"]
+size = Vector2(101, 102)
+
 [node name="Player" type="CharacterBody2D" unique_id=1048452225]
 script = ExtResource("1_g2els")
 
@@ -24,3 +27,7 @@ offset_left = -56.0
 offset_top = -92.0
 offset_right = 63.0
 offset_bottom = -69.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=271543394]
+position = Vector2(-0.5, -3)
+shape = SubResource("RectangleShape2D_g2els")
