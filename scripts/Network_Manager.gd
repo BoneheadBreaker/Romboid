@@ -7,7 +7,7 @@ signal player_disconnected(peer_id)
 signal server_disconnected
 
 const DEFAULT_PORT = 36666
-const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost, replace with server
+const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
 const MAX_CONNECTIONS = 5
 
 var players = {}
@@ -54,15 +54,27 @@ func create_game():
 		return error
 	multiplayer.multiplayer_peer = peer
 
-	players[1] = connection_type
-	player_connected.emit(1, connection_type)
+	_register_player(connection_type)
 
 # Adds player to lobby but not the game world
 @rpc("any_peer", "reliable")
 func _register_player(new_player_info):
+	if not multiplayer.is_server():
+		return
+		
 	var new_player_id = multiplayer.get_remote_sender_id()
-	players[new_player_id] = new_player_info
-	player_connected.emit(new_player_id, new_player_info)
+
+
+	if multiplayer.is_server() and new_player_id == 0:
+		new_player_id = multiplayer.get_unique_id()
+
+	var player_data := {
+		"type": new_player_info,
+		"team": null
+	}
+
+	players[new_player_id] = player_data
+	player_connected.emit(new_player_id, player_data)
 
 @rpc("authority", "call_remote", "reliable")
 func game_already_started():
@@ -80,8 +92,6 @@ func load_game():
 		
 		await get_tree().process_frame
 		await get_tree().process_frame
-		
-		print("DEBUG: SPAWNING LEVEL")
 
 @rpc("any_peer", "call_local", "reliable")
 func request_bullet(rot):
@@ -99,7 +109,6 @@ func request_bullet(rot):
 		bullet.global_position = player.global_position
 		bullet.rotation = rot
 		bullet.shooter_id = sender_id
-		#bullet.set_multiplayer_authority(sender_id) # optional, server can keep authority
 
 		# Add to server-side bullets container (normal add_child)
 		var bullets_node = scene_root.get_node("Main/LoadedLevels/TestingMap/Bullets")
@@ -107,9 +116,6 @@ func request_bullet(rot):
 
 		# Optional: add to group for server-side collision
 		bullet.add_to_group("Bullets")
-
-		# Notify clients to show the bullet via RPC
-		#rpc("spawn_bullet_on_client", sender_id, bullet.global_position, bullet.rotation)
 
 @rpc("any_peer", "call_local")
 func spawn_bullet_on_client(shooter_id: int, pos: Vector2, rot: float) -> void:
@@ -138,10 +144,6 @@ func _on_player_disconnected(id):
 
 func _on_connected_ok():
 	print("Connected")
-	var peer_id = multiplayer.get_unique_id()
-	players[peer_id] = connection_type
-	player_connected.emit(peer_id, connection_type)
-
 
 func _on_connected_fail():
 	print("Couldn't Join")

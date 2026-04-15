@@ -26,6 +26,7 @@ func spawn_all_players():
 	print("ABC " + str(spawn_point_container))
 	var spawnpoints := spawn_point_container.get_children()
 	var pid_array := NetworkManager.players.keys()
+	print(str(NetworkManager.players) + "ENDS HERE:")
 	print("Players: ", pid_array)
 	pid_array.sort()  
 	# this makes sure that the spawnpoints are in order. Not needed, just debug
@@ -45,5 +46,4 @@ func spawn_player(data):
 	print(pid)
 	player.set_multiplayer_authority(pid)
 
-	
 	return player
