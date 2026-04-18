@@ -13,7 +13,7 @@
 
 - [ ] Add players to teams
     - [x] prevent starting the match if their is an odd number of players (may changed in future)
-    - [ ] Sort the even number of players into a random team (may allow host picking teams in future)
+    - [x] Sort the even number of players into a random team (may allow host picking teams in future)
     - [ ] Add each player in a team to a group
     - [ ] make spawnpoints teamed (example only team 1 can spawn at these spawn points)
 

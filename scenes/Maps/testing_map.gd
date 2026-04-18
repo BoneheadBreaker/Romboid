@@ -7,6 +7,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	randomize()
 
 	player_spawner.spawn_function = Callable(self, "spawn_player")
 	if multiplayer.is_server():
@@ -14,7 +15,6 @@ func _ready() -> void:
 		await get_tree().process_frame
 		await get_tree().process_frame
 		spawn_all_players()
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -38,12 +38,22 @@ func spawn_all_players():
 		player_spawner.spawn([pid, spawnpoint])
 
 func spawn_player(data):
+	print("BEFORE: " + str(NetworkManager.players))
+
 	var player = player_scene.instantiate()
 	var pid = data[0]
 	var spawnpoint = data[1]
+	
+	var team = randi() % 2 + 1
+	if pid in NetworkManager.players:
+		NetworkManager.players[pid]["team"] = team
+		#player.add_to_group("team_" + str(team))
+
 	player.position = spawnpoint
 	player.name = str(pid)
 	print(pid)
 	player.set_multiplayer_authority(pid)
-
+	
+	print("AFTER: " + str(NetworkManager.players))
+	
 	return player
