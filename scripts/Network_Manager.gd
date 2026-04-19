@@ -4,7 +4,6 @@ extends Node
 
 signal player_connected(peer_id, player_info)
 signal player_disconnected(peer_id)
-signal server_disconnected
 
 const DEFAULT_PORT = 36666
 const DEFAULT_SERVER_IP = "127.0.0.1" # IPv4 localhost
@@ -154,4 +153,4 @@ func _on_server_disconnected():
 	print("Server Disconnected")
 	multiplayer.multiplayer_peer = OfflineMultiplayerPeer.new()
 	players.clear()
-	server_disconnected.emit()
+	Signals.server_disconnected.emit()

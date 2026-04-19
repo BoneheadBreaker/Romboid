@@ -19,6 +19,8 @@ func _ready() -> void:
 	Signals.connect("game_already_started", game_already_started)
 	Signals.connect("back_to_menu", go_back_to_menu)
 	Signals.connect("back_to_lobby", go_back_to_lobby)
+	
+	Signals.connect("server_disconnected", server_disconnected)
 
 func host_game_UI():
 	NetworkManager.create_game()
@@ -31,19 +33,17 @@ func host_game_UI():
 	
 func join_game_UI():
 	print("added Join game UI")
+	remove_all_ui()
+	
 	var joinUI = join_UI_scene.instantiate()
 	UI_holder.add_child(joinUI)
-	
-	UI_holder.get_node("MainMenu").queue_free()
 
 func game_already_started():
 	var GameAlreadyStartedUI = game_already_started_ui_scene.instantiate()
 	UI_holder.add_child(GameAlreadyStartedUI)
 
 func go_back_to_menu():
-	var all_uis = UI_holder.get_children()
-	for node in all_uis:
-		node.queue_free()
+	remove_all_ui()
 	
 	var mainUI = main_menu.instantiate()
 	UI_holder.add_child(mainUI)
@@ -52,9 +52,7 @@ func start_game():
 	print("second run")
 	NetworkManager.load_game.rpc()
 	
-	var all_uis = UI_holder.get_children()
-	for node in all_uis:
-		node.queue_free()
+	remove_all_ui()
 		
 	NetworkManager.game_started = true
 
@@ -65,9 +63,7 @@ func check_if_can_start_game(override_odd_players):
 	elif Globals.is_even(NetworkManager.players.size()) and override_odd_players == false:
 		start_game()
 	else:
-		var all_uis = UI_holder.get_children()
-		for node in all_uis:
-			node.queue_free()
+		remove_all_ui()
 		
 		var OddPlayersUI = odd_number_of_players_ui_scene.instantiate()
 		UI_holder.add_child(OddPlayersUI)
@@ -78,9 +74,18 @@ func join_game():
 	UI_holder.get_node("join_ui").queue_free()
 
 func go_back_to_lobby():
-	var all_uis = UI_holder.get_children()
-	for node in all_uis:
-		node.queue_free()
+	remove_all_ui()
 	
 	var HostUI = host_UI_scene.instantiate()
 	UI_holder.add_child(HostUI)
+
+func remove_all_ui():
+	var all_uis = UI_holder.get_children()
+	for node in all_uis:
+		node.queue_free()
+
+func server_disconnected():
+	remove_all_ui()
+	
+	var mainUI = main_menu.instantiate()
+	UI_holder.add_child(mainUI)

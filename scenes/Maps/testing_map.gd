@@ -47,7 +47,7 @@ func spawn_player(data):
 	var team = randi() % 2 + 1
 	if pid in NetworkManager.players:
 		NetworkManager.players[pid]["team"] = team
-		#player.add_to_group("team_" + str(team))
+		player.add_to_group("team_" + str(team))
 
 	player.position = spawnpoint
 	player.name = str(pid)
