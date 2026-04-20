@@ -11,11 +11,11 @@
     - [x] Spawn bullets for all clients on click
     - [x] Make bullets do damage (server changes damage to prevent cheating)
 
-- [ ] Add players to teams
+- [x] Add players to teams
     - [x] prevent starting the match if their is an odd number of players (may changed in future)
     - [x] Sort the even number of players into a random team (may allow host picking teams in future)
     - [x] Add each player in a team to a group
-    - [ ] make spawnpoints teamed (example only team 1 can spawn at these spawn points)
+    - [x] make spawnpoints teamed (example only team 1 can spawn at these spawn points)
 
 - [ ] Lose/Win conditions
     - [ ] Make a condition where a team loses
