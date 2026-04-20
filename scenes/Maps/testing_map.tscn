@@ -74,6 +74,10 @@ texture = ExtResource("1_6sumr")
 [sub_resource type="TileSet" id="TileSet_jwxd2"]
 sources/0 = SubResource("TileSetAtlasSource_7at8o")
 
+[sub_resource type="LabelSettings" id="LabelSettings_jwxd2"]
+font_color = Color(0.5058824, 0.7607843, 0.20392157, 1)
+shadow_size = 0
+
 [node name="TestingMap" type="Node2D" unique_id=1715856892]
 script = ExtResource("1_jwxd2")
 player_scene = ExtResource("2_xexbb")
@@ -90,16 +94,16 @@ spawn_path = NodePath("..")
 
 [node name="SpawnPoints" type="Node2D" parent="." unique_id=382964216]
 
-[node name="Node2D" type="Node2D" parent="SpawnPoints" unique_id=219536136]
+[node name="TEAM_1_spawnpoint" type="Node2D" parent="SpawnPoints" unique_id=219536136]
 position = Vector2(78, 39)
 
-[node name="Node2D2" type="Node2D" parent="SpawnPoints" unique_id=1764053060]
+[node name="TEAM_2_spawnpoint" type="Node2D" parent="SpawnPoints" unique_id=1764053060]
 position = Vector2(439, 301)
 
-[node name="Node2D3" type="Node2D" parent="SpawnPoints" unique_id=874428377]
+[node name="TEAM_1_spawnpoint2" type="Node2D" parent="SpawnPoints" unique_id=874428377]
 position = Vector2(498, 64)
 
-[node name="Node2D4" type="Node2D" parent="SpawnPoints" unique_id=1073349672]
+[node name="TEAM_2_spawnpoint2" type="Node2D" parent="SpawnPoints" unique_id=1073349672]
 position = Vector2(88, 298)
 
 [node name="Bullets" type="Node2D" parent="." unique_id=1701350804]
@@ -107,3 +111,35 @@ position = Vector2(88, 298)
 [node name="BulletSpawner" type="MultiplayerSpawner" parent="Bullets" unique_id=140456060]
 _spawnable_scenes = PackedStringArray("uid://bhbahipbysjg0")
 spawn_path = NodePath("..")
+
+[node name="Label" type="Label" parent="." unique_id=669831926]
+offset_left = 58.0
+offset_top = 72.0
+offset_right = 98.0
+offset_bottom = 95.0
+text = "TEAM 1"
+label_settings = SubResource("LabelSettings_jwxd2")
+
+[node name="Label2" type="Label" parent="." unique_id=487209045]
+offset_left = 413.0
+offset_top = 316.0
+offset_right = 470.0
+offset_bottom = 339.0
+text = "TEAM 2"
+label_settings = SubResource("LabelSettings_jwxd2")
+
+[node name="Label3" type="Label" parent="." unique_id=1090262474]
+offset_left = 477.0
+offset_top = 87.0
+offset_right = 534.0
+offset_bottom = 110.0
+text = "TEAM 1"
+label_settings = SubResource("LabelSettings_jwxd2")
+
+[node name="Label4" type="Label" parent="." unique_id=83994548]
+offset_left = 62.0
+offset_top = 327.0
+offset_right = 119.0
+offset_bottom = 350.0
+text = "TEAM 2"
+label_settings = SubResource("LabelSettings_jwxd2")

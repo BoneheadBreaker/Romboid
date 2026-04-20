@@ -28,14 +28,17 @@ func spawn_all_players():
 	var pid_array := NetworkManager.players.keys()
 	print(str(NetworkManager.players) + "ENDS HERE:")
 	print("Players: ", pid_array)
-	pid_array.sort()  
-	# this makes sure that the spawnpoints are in order. Not needed, just debug
+	pid_array.sort() # this makes sure that the spawnpoints are in order. Not needed, just debug
 	
 	for i in range(pid_array.size()):
 		var pid = pid_array[i]
 		var spawnpoint = spawnpoints[i].global_position
 		
-		player_spawner.spawn([pid, spawnpoint])
+		var team = (i % 2) + 1 # decides team based on even or odd number
+		if pid in NetworkManager.players:
+			NetworkManager.players[pid]["team"] = team
+			
+		player_spawner.spawn([pid, spawnpoint, team])
 
 func spawn_player(data):
 	print("BEFORE: " + str(NetworkManager.players))
@@ -43,11 +46,9 @@ func spawn_player(data):
 	var player = player_scene.instantiate()
 	var pid = data[0]
 	var spawnpoint = data[1]
-	
-	var team = randi() % 2 + 1
-	if pid in NetworkManager.players:
-		NetworkManager.players[pid]["team"] = team
-		player.add_to_group("team_" + str(team))
+	var team = data[2]
+
+	player.add_to_group("team_" + str(team))
 
 	player.position = spawnpoint
 	player.name = str(pid)
