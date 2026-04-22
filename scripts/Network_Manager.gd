@@ -69,11 +69,16 @@ func _register_player(new_player_info):
 
 	var player_data := {
 		"type": new_player_info,
-		"team": null
+		"team": null,
+		"spawnpoint": null,
+		"deaths": null
 	}
 
 	players[new_player_id] = player_data
 	player_connected.emit(new_player_id, player_data)
+
+func respawn_player(pid, spawnpoint, team):
+	scene_root.get_node("Main/LoadedLevels/TestingMap").spawn_player([pid, spawnpoint, team])
 
 @rpc("authority", "call_remote", "reliable")
 func game_already_started():

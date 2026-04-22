@@ -71,6 +71,8 @@ func spawn_player(data):
 	var player = player_scene.instantiate()
 	var pid = data[0]
 	var spawnpoint = data[1]
+	if multiplayer.is_server():
+		NetworkManager.players[pid]["spawnpoint"] = spawnpoint
 	var team = data[2]
 
 	player.add_to_group("team_" + str(team))

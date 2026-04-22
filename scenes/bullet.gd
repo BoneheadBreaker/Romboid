@@ -6,19 +6,6 @@ var shooter_id: int = 0
 
 func _process(delta: float) -> void:
 	position += transform.x * speed * delta
-	#if multiplayer.is_server():
-		#_check_hits()
-
-#func _check_hits() -> void:
-	#for player in get_parent().get_children():
-		#if not player is CharacterBody2D:
-			#continue
-		#if player.name == str(shooter_id):
-			#continue
-		#if global_position.distance_to(player.global_position) < hit_range:
-			#player.health = player.health - 50
-			#queue_free()
-			#return
 
 func _on_body_entered(body: Node2D) -> void:
 	var player = body
@@ -30,6 +17,25 @@ func _on_body_entered(body: Node2D) -> void:
 
 		if global_position.distance_to(player.global_position) < hit_range:
 			player.health = player.health - 50
+			var pid = player.get_multiplayer_authority()
+			var spawnpoint
+			var team
 			print(player.health)
+			if player.health <= 0:
+				var data = NetworkManager.players.get(pid)
+				if data:
+					spawnpoint = data.get("spawnpoint")
+					team = data.get("team")
+				
+				player.queue_free()
+				
+				await get_tree().process_frame
+				await get_tree().process_frame
+				await get_tree().process_frame
+				
+				if spawnpoint:
+					if pid:
+						get_tree().get_root().get_node("Main/LoadedLevels/TestingMap").player_spawner.spawn([pid, spawnpoint, team])
+			
 			queue_free()
 			return
