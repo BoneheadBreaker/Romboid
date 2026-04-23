@@ -35,6 +35,12 @@ func _on_body_entered(body: Node2D) -> void:
 				
 				if spawnpoint:
 					if pid:
+						# Hide it so it's "gone" for players
+						visible = false 
+						# Disable collisions so it can't hit anyone else
+						$CollisionShape2D.set_deferred("disabled", true)
+		
+						await get_tree().create_timer(3.0).timeout  # Wait for 3 seconds
 						get_tree().get_root().get_node("Main/LoadedLevels/TestingMap").player_spawner.spawn([pid, spawnpoint, team])
 			
 			queue_free()
