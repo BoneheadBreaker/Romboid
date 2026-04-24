@@ -49,7 +49,6 @@ func go_back_to_menu():
 	UI_holder.add_child(mainUI)
 
 func start_game():
-	print("second run")
 	NetworkManager.load_game.rpc()
 	
 	remove_all_ui()
@@ -57,7 +56,6 @@ func start_game():
 	NetworkManager.game_started = true
 
 func check_if_can_start_game(override_odd_players):
-	print("running")
 	if override_odd_players == true:
 		start_game()
 	elif Globals.is_even(NetworkManager.players.size()) and override_odd_players == false:

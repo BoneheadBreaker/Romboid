@@ -66,8 +66,6 @@ func get_spawnpoint(team: int) -> Vector2:
 	return node.global_position
 	
 func spawn_player(data):
-	print("BEFORE: " + str(NetworkManager.players))
-
 	var player = player_scene.instantiate()
 	var pid = data[0]
 	var spawnpoint = data[1]
@@ -81,7 +79,5 @@ func spawn_player(data):
 	player.name = str(pid)
 	print(pid)
 	player.set_multiplayer_authority(pid)
-	
-	print("AFTER: " + str(NetworkManager.players))
 	
 	return player

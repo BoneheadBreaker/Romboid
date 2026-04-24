@@ -71,7 +71,7 @@ func _register_player(new_player_info):
 		"type": new_player_info,
 		"team": null,
 		"spawnpoint": null,
-		"deaths": null
+		"revives": 3
 	}
 
 	players[new_player_id] = player_data

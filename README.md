@@ -18,7 +18,7 @@
     - [x] make spawnpoints teamed (example only team 1 can spawn at these spawn points)
 
 - [ ] Lose/Win conditions
-    - [ ] Make a condition where a team loses
+    - [x] Make a condition where a team loses
     - [ ] Make a condition where a team wins
     - [ ] Make a tie condition (optional)
 
