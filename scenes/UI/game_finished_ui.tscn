@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://in0uei4156k1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hyo6"]
+font_size = 32
+outline_size = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_33bb8"]
+font_size = 22
+
+[node name="GameFinishedUI" type="Control" unique_id=1769732336]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=2043922181]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=1719473881]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1671235912]
+layout_mode = 2
+text = "Game Over"
+label_settings = SubResource("LabelSettings_2hyo6")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1533655848]
+layout_mode = 2
+text = "Team X won!"
+label_settings = SubResource("LabelSettings_33bb8")
+horizontal_alignment = 1
+vertical_alignment = 1

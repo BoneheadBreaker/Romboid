@@ -17,6 +17,7 @@ var game_started = false
 var player_scene = preload("res://scenes/player.tscn")
 var level_scene = preload("res://scenes/Maps/testing_map.tscn")
 var bullet_scene = preload("res://scenes/bullet.tscn")
+var game_finished_ui = preload("res://scenes/UI/game_finished_ui.tscn")
 
 var players_container
 
@@ -127,6 +128,11 @@ func spawn_bullet_on_client(shooter_id: int, pos: Vector2, rot: float) -> void:
 	bullet.shooter_id = shooter_id
 	scene_root.get_node("Main/LoadedLevels/TestingMap/Bullets").add_child(bullet)
 
+@rpc("any_peer", "call_local", "reliable")
+func display_game_over_ui(team):
+	var game_over_ui = game_finished_ui.instantiate()
+	game_over_ui.get_node("CenterContainer/VBoxContainer/Label2").text = "Team %s won!" % team
+	scene_root.get_node("Main/CanvasLayer").add_child(game_over_ui)
 
 # When a peer connects, send them my player info.
 # This allows transfer of all desired data for each player, not only the unique ID.

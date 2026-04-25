@@ -81,7 +81,7 @@ func check_for_winner():
 	# Check the results
 	if not team1_alive:
 		print("TEAM 2 WINS! Team 1 is out of lives.")
-		# Trigger your End Game UI here
+		NetworkManager.display_game_over_uirpc(2)
 	elif not team2_alive:
 		print("TEAM 1 WINS! Team 2 is out of lives.")
-		# Trigger your End Game UI here
+		NetworkManager.display_game_over_ui.rpc(1)
