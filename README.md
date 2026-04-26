@@ -17,9 +17,9 @@
     - [x] Add each player in a team to a group
     - [x] make spawnpoints teamed (example only team 1 can spawn at these spawn points)
 
-- [ ] Lose/Win conditions
+- [x:] Lose/Win conditions
     - [x] Make a condition where a team loses
-    - [ ] Make a condition where a team wins
+    - [x] Make a condition where a team wins
     - [ ] Make a tie condition (optional)
 
 # Extra checklist (features I want to add but are not very important right now)
