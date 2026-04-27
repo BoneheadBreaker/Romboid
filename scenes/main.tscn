@@ -1,7 +1,6 @@
 [gd_scene format=3 uid="uid://d1ycb16aghcu0"]
 
 [ext_resource type="Script" uid="uid://dmcha36cafddc" path="res://scripts/main.gd" id="1_o5qli"]
-[ext_resource type="PackedScene" uid="uid://dsdn7826h6wwo" path="res://scenes/Maps/testing_map.tscn" id="2_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://wp1k4xf2xl4k" path="res://scenes/UI/main_menu.tscn" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://bl537f7pa0y8m" path="res://icon.svg" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://cjvym3hvelbnx" path="res://scenes/UI/host_ui.tscn" id="3_tbgi4"]
@@ -9,7 +8,6 @@
 
 [node name="Main" type="Node2D" unique_id=2063003548]
 script = ExtResource("1_o5qli")
-level_scene = ExtResource("2_jyhfs")
 host_UI_scene = ExtResource("3_tbgi4")
 join_UI_scene = ExtResource("4_tefeu")
 

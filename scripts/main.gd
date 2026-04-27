@@ -1,6 +1,5 @@
 extends Node2D
 
-@export var level_scene : PackedScene
 @export var host_UI_scene : PackedScene
 @export var join_UI_scene : PackedScene
 var game_already_started_ui_scene = preload("res://scenes/UI/game_already_started_ui.tscn")

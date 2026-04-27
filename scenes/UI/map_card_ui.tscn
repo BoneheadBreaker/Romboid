@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c3fqv663v7w07"]
+
+[ext_resource type="Texture2D" uid="uid://bl537f7pa0y8m" path="res://icon.svg" id="1_pw022"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_8e7hg"]
+font_size = 32
+
+[node name="MapCardUI" type="Button" unique_id=1193859978]
+custom_minimum_size = Vector2(284, 285.764)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -868.0
+offset_bottom = -362.23602
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+icon = ExtResource("1_pw022")
+icon_alignment = 1
+expand_icon = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1807781621]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=1165539740]
+layout_mode = 2
+text = "Map Title Here"
+label_settings = SubResource("LabelSettings_8e7hg")
+horizontal_alignment = 1
+vertical_alignment = 1

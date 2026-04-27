@@ -1,6 +1,6 @@
 extends Control
 
-@onready var connected_players_label = $CenterContainer/VBoxContainer/ConnectedPlayers
+@onready var connected_players_label = $VBoxContainer/ConnectedPlayers
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

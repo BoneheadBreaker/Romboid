@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://cjvym3hvelbnx"]
 
 [ext_resource type="Script" uid="uid://drba70xlb5tjq" path="res://scenes/UI/host_ui.gd" id="1_vc6kq"]
+[ext_resource type="PackedScene" uid="uid://c3fqv663v7w07" path="res://scenes/UI/map_card_ui.tscn" id="2_o056o"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_o056o"]
+font_size = 18
 
 [node name="HostUi" type="Control" unique_id=1947528727]
 layout_mode = 3
@@ -11,24 +15,104 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_vc6kq")
 
-[node name="CenterContainer" type="CenterContainer" parent="." unique_id=1095331181]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=268160527]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_top = 0.13
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_top = -21.239998
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer" unique_id=721969091]
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer" unique_id=2085655474]
 layout_mode = 2
 
-[node name="ConnectedPlayers" type="Label" parent="CenterContainer/VBoxContainer" unique_id=1804116273]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/ScrollContainer" unique_id=1639524534]
+layout_mode = 2
+columns = 4
+
+[node name="MapCardUI" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1193859978 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI2" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1852737510 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI3" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=959142946 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI4" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=852326262 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI6" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1897071194 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI7" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1625153720 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI8" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=351757116 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI9" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=141138116 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI14" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1252883465 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI15" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1628827820 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI16" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=405841580 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI17" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1059298836 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI18" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1651661327 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI19" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1750924278 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI20" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=2137653468 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI21" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1035167767 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI5" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1230548699 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI10" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=766246925 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI11" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1870232218 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI12" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=373955588 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="MapCardUI13" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1254473701 instance=ExtResource("2_o056o")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=721969091]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.097222224
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ConnectedPlayers" type="Label" parent="VBoxContainer" unique_id=1804116273]
 layout_mode = 2
 text = "Players: 0"
+label_settings = SubResource("LabelSettings_o056o")
 horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="StartGameButton" type="Button" parent="CenterContainer/VBoxContainer" unique_id=747618051]
+[node name="StartGameButton" type="Button" parent="VBoxContainer" unique_id=747618051]
 layout_mode = 2
 text = "Start Game"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StartGameButton" to="." method="_on_start_game_button_pressed"]

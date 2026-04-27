@@ -87,7 +87,7 @@ func game_already_started():
 @rpc("any_peer", "call_local", "reliable")
 func load_game():
 	if multiplayer.is_server():
-		# only server loads scene. MultiplayerSpawner spawns it for everyone
+		# only server loads scene MultiplayerSpawner spawns it for everyone
 
 		var level = level_scene.instantiate()
 		scene_root.get_node("Main/LoadedLevels").add_child(level)
