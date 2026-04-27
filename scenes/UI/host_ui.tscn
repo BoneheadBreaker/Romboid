@@ -77,21 +77,6 @@ layout_mode = 2
 [node name="MapCardUI20" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=2137653468 instance=ExtResource("2_o056o")]
 layout_mode = 2
 
-[node name="MapCardUI21" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1035167767 instance=ExtResource("2_o056o")]
-layout_mode = 2
-
-[node name="MapCardUI5" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1230548699 instance=ExtResource("2_o056o")]
-layout_mode = 2
-
-[node name="MapCardUI10" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=766246925 instance=ExtResource("2_o056o")]
-layout_mode = 2
-
-[node name="MapCardUI11" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1870232218 instance=ExtResource("2_o056o")]
-layout_mode = 2
-
-[node name="MapCardUI12" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=373955588 instance=ExtResource("2_o056o")]
-layout_mode = 2
-
 [node name="MapCardUI13" parent="MarginContainer/ScrollContainer/GridContainer" unique_id=1254473701 instance=ExtResource("2_o056o")]
 layout_mode = 2
 
