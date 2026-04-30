@@ -14,3 +14,5 @@ signal back_to_menu # the client wants to go back to menu
 signal back_to_lobby # the host wants to return to the lobby (for example after an odd number of players message)
 
 signal server_disconnected # called on the client when the server disconnects
+
+signal map_selected(map)

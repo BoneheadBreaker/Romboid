@@ -1,15 +1,54 @@
 extends Control
 
 @onready var connected_players_label = $VBoxContainer/ConnectedPlayers
+@onready var grid = $MarginContainer/ScrollContainer/GridContainer
 
-# Called when the node enters the scene tree for the first time.
+@export var card_scene: PackedScene
+
+var scene_names: Array[String] = []
+
 func _ready() -> void:
-	pass # Replace with function body.
+	get_builtin_maps()
+	spawn_map_cards()
+
+func get_builtin_maps():
+	scene_names.clear()
+
+	var path = "res://scenes/Maps"
+	var dir = DirAccess.open(path)
+	if dir == null:
+		push_error("Cannot open directory: " + path)
+		return
+
+	dir.list_dir_begin()
+	var file_name = dir.get_next()
+
+	while file_name != "":
+		if !dir.current_is_dir():
+			if file_name.ends_with(".tscn"):
+				scene_names.append(file_name.get_basename())
+
+		file_name = dir.get_next()
+
+	dir.list_dir_end()
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func spawn_map_cards() -> void:
+	for child in grid.get_children():
+		child.queue_free()
+
+	for scene_name in scene_names:
+		var card = card_scene.instantiate()
+
+		var path = "res://scenes/Maps/%s.tscn" % scene_name
+
+		card.setup(scene_name, path)
+
+		grid.add_child(card)
+
 func _process(delta: float) -> void:
 	connected_players_label.text = str(NetworkManager.players.size())
+
 
 func _on_start_game_button_pressed() -> void:
 	Signals.start_game.emit(false)

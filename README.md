@@ -17,7 +17,7 @@
     - [x] Add each player in a team to a group
     - [x] make spawnpoints teamed (example only team 1 can spawn at these spawn points)
 
-- [x:] Lose/Win conditions
+- [x] Lose/Win conditions
     - [x] Make a condition where a team loses
     - [x] Make a condition where a team wins
     - [ ] Make a tie condition (optional)
@@ -37,8 +37,11 @@
     - [ ] Add player assets
     - [ ] Actual maps
     - [ ] etc
-
+`
 - [ ] Improve map system to allow multiple maps, and load maps in a way that custom maps can be made
     - [ ] Add support for different maps
+        - [x] Make UI for selecting different maps
+        - [x] Load maps into the UI
+        - [ ] When the game starts, Load the selected map
     - [ ] Make an ingame map editor (hopefully)
     - [ ] Make maps beable to be customly imported (maybe host imports it and can send map to clients, or all clients need the map locally etc)
