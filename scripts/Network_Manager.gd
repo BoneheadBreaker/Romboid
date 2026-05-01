@@ -15,11 +15,12 @@ var game_started = false
 
 # Scenes
 var player_scene = preload("res://scenes/player.tscn")
-var level_scene = preload("res://scenes/Maps/testing_map.tscn")
 var bullet_scene = preload("res://scenes/bullet.tscn")
 var game_finished_ui = preload("res://scenes/UI/game_finished_ui.tscn")
 
 var players_container
+
+var current_map_name = null
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -85,11 +86,13 @@ func game_already_started():
 	multiplayer.multiplayer_peer.close() 
 
 @rpc("any_peer", "call_local", "reliable")
-func load_game():
+func load_game(map_name):
 	if multiplayer.is_server():
 		# only server loads scene MultiplayerSpawner spawns it for everyone
-
-		var level = level_scene.instantiate()
+		
+		current_map_name = map_name
+		var map_path = load("res://scenes/Maps/%s.tscn" % map_name)
+		var level = map_path.instantiate()
 		scene_root.get_node("Main/LoadedLevels").add_child(level)
 		
 		await get_tree().process_frame
@@ -98,7 +101,7 @@ func load_game():
 @rpc("any_peer", "call_local", "reliable")
 func request_bullet(rot):
 	if multiplayer.is_server():
-		players_container = scene_root.get_node("Main/LoadedLevels/TestingMap/Players/")
+		players_container = scene_root.get_node("Main/LoadedLevels/%s/Players/" % current_map_name)
 		
 		var sender_id = multiplayer.get_remote_sender_id()
 		var player = players_container.get_node_or_null(str(sender_id))
@@ -113,7 +116,7 @@ func request_bullet(rot):
 		bullet.shooter_id = sender_id
 
 		# Add to server-side bullets container (normal add_child)
-		var bullets_node = scene_root.get_node("Main/LoadedLevels/TestingMap/Bullets")
+		var bullets_node = scene_root.get_node("Main/LoadedLevels/%s/Bullets" % current_map_name)
 		bullets_node.add_child(bullet, true)
 
 		# Optional: add to group for server-side collision
@@ -126,7 +129,7 @@ func spawn_bullet_on_client(shooter_id: int, pos: Vector2, rot: float) -> void:
 	bullet.global_position = pos
 	bullet.rotation = rot
 	bullet.shooter_id = shooter_id
-	scene_root.get_node("Main/LoadedLevels/TestingMap/Bullets").add_child(bullet)
+	scene_root.get_node("Main/LoadedLevels/%s/Bullets" % current_map_name).add_child(bullet)
 
 @rpc("any_peer", "call_local", "reliable")
 func display_game_over_ui(team):

@@ -7,7 +7,10 @@ extends Control
 
 var scene_names: Array[String] = []
 
+var current_selected_map = null
+
 func _ready() -> void:
+	Signals.connect("map_selected", map_selected)
 	get_builtin_maps()
 	spawn_map_cards()
 
@@ -49,6 +52,8 @@ func spawn_map_cards() -> void:
 func _process(delta: float) -> void:
 	connected_players_label.text = str(NetworkManager.players.size())
 
+func map_selected(map_name):
+	current_selected_map = map_name
 
 func _on_start_game_button_pressed() -> void:
-	Signals.start_game.emit(false)
+	Signals.start_game.emit(false, current_selected_map)

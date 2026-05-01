@@ -38,4 +38,4 @@ label_settings = SubResource("LabelSettings_8e7hg")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="." to="." method="_on_map_pressed"]
+[connection signal="pressed" from="." to="." method="_map_pressed"]

@@ -25,5 +25,5 @@ texture = ExtResource("3_sugp2")
 [node name="LoadedLevels" type="Node2D" parent="." unique_id=1169561316]
 
 [node name="LevelSpawner" type="MultiplayerSpawner" parent="LoadedLevels" unique_id=836145481]
-_spawnable_scenes = PackedStringArray("uid://dsdn7826h6wwo")
+_spawnable_scenes = PackedStringArray("uid://dsdn7826h6wwo", "uid://b5vuwvbu0b6lw")
 spawn_path = NodePath("..")

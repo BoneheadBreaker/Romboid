@@ -47,18 +47,18 @@ func go_back_to_menu():
 	var mainUI = main_menu.instantiate()
 	UI_holder.add_child(mainUI)
 
-func start_game():
-	NetworkManager.load_game.rpc()
+func start_game(map_name):
+	NetworkManager.load_game.rpc(map_name)
 	
 	remove_all_ui()
 		
 	NetworkManager.game_started = true
 
-func check_if_can_start_game(override_odd_players):
+func check_if_can_start_game(override_odd_players, map_name):
 	if override_odd_players == true:
-		start_game()
+		start_game(map_name)
 	elif Globals.is_even(NetworkManager.players.size()) and override_odd_players == false:
-		start_game()
+		start_game(map_name)
 	else:
 		remove_all_ui()
 		

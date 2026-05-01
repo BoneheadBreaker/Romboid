@@ -37,11 +37,11 @@
     - [ ] Add player assets
     - [ ] Actual maps
     - [ ] etc
-`
+
 - [ ] Improve map system to allow multiple maps, and load maps in a way that custom maps can be made
-    - [ ] Add support for different maps
+    - [x] Add support for different maps
         - [x] Make UI for selecting different maps
         - [x] Load maps into the UI
-        - [ ] When the game starts, Load the selected map
+        - [x] When the game starts, Load the selected map
     - [ ] Make an ingame map editor (hopefully)
     - [ ] Make maps beable to be customly imported (maybe host imports it and can send map to clients, or all clients need the map locally etc)

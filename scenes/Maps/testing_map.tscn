@@ -78,7 +78,7 @@ sources/0 = SubResource("TileSetAtlasSource_7at8o")
 font_color = Color(0.5058824, 0.7607843, 0.20392157, 1)
 shadow_size = 0
 
-[node name="TestingMap" type="Node2D" unique_id=1715856892]
+[node name="testing_map" type="Node2D" unique_id=1715856892]
 script = ExtResource("1_jwxd2")
 player_scene = ExtResource("2_xexbb")
 

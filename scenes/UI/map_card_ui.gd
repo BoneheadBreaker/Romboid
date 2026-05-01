@@ -13,3 +13,7 @@ func setup(name: String, path: String) -> void:
 
 func _ready() -> void:
 	label.text = map_name
+
+
+func _map_pressed() -> void:
+	Signals.map_selected.emit(map_name)
