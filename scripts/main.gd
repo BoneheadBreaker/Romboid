@@ -23,15 +23,13 @@ func _ready() -> void:
 
 func host_game_UI():
 	NetworkManager.create_game()
-
-	print("added host game UI")
+	
 	var hostUI = host_UI_scene.instantiate()
 	UI_holder.add_child(hostUI)
 	
 	UI_holder.get_node("MainMenu").queue_free()
 	
 func join_game_UI():
-	print("added Join game UI")
 	remove_all_ui()
 	
 	var joinUI = join_UI_scene.instantiate()
