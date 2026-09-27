@@ -1,3 +1,6 @@
+> [!WARNING]
+> Development has paused for now, Unsure if it will ever be continued
+
 # Romboid
 
 ###### Work in progress fast pace skill based video game
